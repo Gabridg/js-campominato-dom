@@ -44,14 +44,29 @@ const rows = 10;
 const cols = 10;
 const totalCols = rows * cols;
 
+let points = '';
+
+function onClickCell() {
+    if (this.classList.contains('clicked')) return;
+    this.classList.add('clicked');
+
+    if (this.classList.contains('clicked')) {
+        points += points++;
+    }
+    console.log(this.innerText);
+    console.log('il tuo punteggio è: ', parseInt(points));
+}
+
+
 playButton.addEventListener('click', function () {
     for (let i = 1; i <= totalCols; i++) {
         const newCols = createCell(i);
 
-        newCols.addEventListener('click', function (event) {
-            event.target.classList.toggle('clicked');
-            console.log('Numero Casella Scelta: ' + newCols.innerText)
-        })
+        newCols.addEventListener('click', onClickCell);
+
+
         griglia.appendChild(newCols);
+
     }
 })
+
