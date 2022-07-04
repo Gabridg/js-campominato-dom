@@ -44,17 +44,25 @@ const rows = 10;
 const cols = 10;
 const totalCols = rows * cols;
 
-let points = '';
+let points = 0;
 
 function onClickCell() {
     if (this.classList.contains('clicked')) return;
     this.classList.add('clicked');
 
     if (this.classList.contains('clicked')) {
-        points += points++;
+        const gameOver = checkGameOver();
+        if (!gameOver) points++;
+        console.log(points);
     }
     console.log(this.innerText);
     console.log('il tuo punteggio è: ', parseInt(points));
+}
+
+function checkGameOver(newCols, bombs) {
+    if (bombs.includes(parseInt(newCols.innerText))) {
+
+    } else { }
 }
 
 
@@ -70,3 +78,24 @@ playButton.addEventListener('click', function () {
     }
 })
 
+const totalBombs = 16;
+
+const maxPoints = totalCols - totalBombs;
+
+function createBombs(totalBombs, totalCols) {
+    const bombs = []
+    while (bombs.length < totalBombs) {
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * totalCols) + 1;
+        } while (bombs.includes(randomNumber));
+        bombs.push(randomNumber);
+    }
+    console.log(bombs)
+
+    return bombs;
+}
+
+
+
+const bombs = createBombs(totalBombs, totalCols);

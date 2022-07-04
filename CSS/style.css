@@ -35,5 +35,15 @@ header .row {
 }
 
 .clicked {
+    cursor: not-allowed;
+}
+
+
+.bomb {
+    background-color: #f00;
+}
+
+.notabomb {
     background-color: #80BDE3;
+
 }
