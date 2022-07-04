@@ -51,18 +51,43 @@ function onClickCell() {
     this.classList.add('clicked');
 
     if (this.classList.contains('clicked')) {
-        const gameOver = checkGameOver();
-        if (!gameOver) points++;
+        const onGameOver = checkGameOver(this, bombs, points, maxPoints);
+        if (!onGameOver) points++;
         console.log(points);
     }
     console.log(this.innerText);
     console.log('il tuo punteggio è: ', parseInt(points));
 }
 
-function checkGameOver(newCols, bombs) {
-    if (bombs.includes(parseInt(newCols.innerText))) {
+function gameOver(points, hasWon) {
+    const boxes = document.querySelectorAll('.box');
+    for (let i = 0; i < boxes.lenght; i++) {
+        boxes[i].classList.add('clicked');
+    }
 
-    } else { }
+    let message = '';
+    if (hasWon) {
+        message = 'Complimenti hai vinto!! il tuo punteggio è: ', points;
+    } else {
+        message = 'Peccato, hai perso!! il tuo punteggio è: ', points;
+    }
+    alert(message);
+}
+
+
+function checkGameOver(newCols, bombs, points, maxPoints) {
+    if (bombs.includes(parseInt(newCols.innerText))) {
+        newCols.classList.add('bomb');
+        gameOver(points, false);
+        return true;
+    } else {
+        newCols.classList.add('notabomb');
+        if (points + 1 === maxPoints) {
+            gameOver(maxPoints, true)
+            return true;
+        }
+        return false;
+    }
 }
 
 
